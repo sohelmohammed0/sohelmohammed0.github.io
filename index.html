@@ -2,8 +2,9 @@
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sohel Mohammed — DevOps Enthusiast</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Sohel Mohammed — DevOps Engineer building infrastructure across AWS, Terraform, and container pipelines.">
+<title>Sohel Mohammed — DevOps Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Bebas+Neue&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -18,6 +19,7 @@
   --gold-l: #e8b97a;
   --gold-dim: rgba(200,150,90,0.12);
   --gold-glow: rgba(200,150,90,0.25);
+  --ok: #3ddc84;
   --mono: 'DM Mono', monospace;
   --display: 'Cormorant Garamond', serif;
   --big: 'Bebas Neue', sans-serif;
@@ -67,6 +69,7 @@ body{
   -webkit-font-smoothing:antialiased;
   transition:background var(--trans),color var(--trans);
 }
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px;}
 
 /* ════════════════════════════════════════════
     CURSOR
@@ -80,6 +83,11 @@ body.on-interactive #c-ring{width:72px;height:72px;border-color:var(--gold);}
 body.on-interactive #c-text{opacity:1;}
 
 .t-dot{position:fixed;width:4px;height:4px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:99990;transform:translate(-50%,-50%);mix-blend-mode:screen;}
+
+@media (hover:none),(pointer:coarse){
+  #c-dot,#c-ring,#c-text,.t-dot{display:none!important;}
+  body{cursor:auto!important;}
+}
 
 /* ════════════════════════════════════════════
     NOISE
@@ -100,6 +108,7 @@ body.on-interactive #c-text{opacity:1;}
 .ld-pct{font-family:var(--big);font-size:clamp(28px,4vw,48px);color:var(--gold);line-height:1;letter-spacing:.05em;}
 .ld-line{position:absolute;bottom:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-l));box-shadow:0 0 24px var(--gold);transition:width .05s linear;}
 .ld-label{position:absolute;bottom:44px;left:48px;font-family:var(--mono);font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--fg3);}
+.ld-cmd{position:absolute;bottom:64px;left:48px;font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--gold);opacity:.85;}
 .ld-name{position:absolute;bottom:44px;right:48px;font-family:var(--mono);font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);}
 .ld-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:80px 80px;animation:grid-in 2s ease forwards;}
 @keyframes grid-in{from{opacity:0}to{opacity:1}}
@@ -123,7 +132,7 @@ body.on-interactive #c-text{opacity:1;}
 
 .hud-logo{
   font-family:var(--display);font-size:20px;font-weight:400;font-style:italic;
-  color:var(--fg);letter-spacing:.06em;cursor:none;
+  color:var(--fg);letter-spacing:.06em;cursor:none;background:none;border:none;
   transition:color var(--trans);
   text-shadow:0 0 30px var(--gold-glow);
 }
@@ -131,7 +140,7 @@ body.on-interactive #c-text{opacity:1;}
 
 .hud-nav{display:flex;align-items:center;gap:8px;}
 .h-dot{
-  width:6px;height:6px;border-radius:50%;
+  width:6px;height:6px;border-radius:50%;border:none;padding:0;
   background:var(--fg3);cursor:none;
   transition:background .4s,transform .4s var(--spring),width .4s var(--spring);
 }
@@ -141,8 +150,8 @@ body.on-interactive #c-text{opacity:1;}
 .hud-right{display:flex;align-items:center;gap:20px;}
 .hud-clock{font-family:var(--mono);font-size:10px;letter-spacing:.15em;color:var(--fg3);min-width:72px;transition:color var(--trans);}
 .hud-status{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--fg3);}
-.pulse-dot{width:5px;height:5px;border-radius:50%;background:#3ddc84;box-shadow:0 0 8px #3ddc84;animation:pd 2s infinite;}
-@keyframes pd{0%,100%{box-shadow:0 0 5px #3ddc84}50%{box-shadow:0 0 16px #3ddc84,0 0 30px #3ddc8440}}
+.pulse-dot{width:5px;height:5px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok);animation:pd 2s infinite;}
+@keyframes pd{0%,100%{box-shadow:0 0 5px var(--ok)}50%{box-shadow:0 0 16px var(--ok),0 0 30px rgba(61,220,132,.25)}}
 
 .theme-btn{
   width:36px;height:36px;border:1px solid var(--border2);border-radius:50%;
@@ -218,11 +227,13 @@ body.on-interactive #c-text{opacity:1;}
   text-transform:uppercase;color:var(--gold);margin-bottom:40px;
   opacity:0;transform:translateY(20px);
   transition:opacity .8s var(--ease) .4s,transform .8s var(--ease) .4s;
+  display:flex;align-items:center;gap:10px;
 }
+.hero-eyebrow .pulse-dot{margin-top:1px;}
 #app.live .hero-eyebrow{opacity:1;transform:none;}
 .hero-name{
   font-family:var(--big);
-  font-size:clamp(80px,15vw,210px);
+  font-size:clamp(64px,15vw,210px);
   line-height:.88;letter-spacing:.01em;
   opacity:0;transform:translateY(70px);
   transition:opacity 1.1s var(--ease) .6s,transform 1.1s var(--ease) .6s;
@@ -231,7 +242,7 @@ body.on-interactive #c-text{opacity:1;}
 .hero-name .outline{-webkit-text-stroke:1px var(--border2);color:transparent;}
 .hero-name .gold{color:var(--gold);}
 .hero-sub{
-  display:flex;align-items:flex-start;gap:48px;margin-top:48px;
+  display:flex;flex-wrap:wrap;align-items:flex-start;gap:48px;margin-top:48px;
   opacity:0;transform:translateY(24px);
   transition:opacity .8s var(--ease) 1s,transform .8s var(--ease) 1s;
 }
@@ -281,7 +292,7 @@ body.on-interactive #c-text{opacity:1;}
 }
 .sec-eye{font-family:var(--mono);font-size:9px;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;opacity:.8;}
 .sec-h{
-  font-family:var(--big);font-size:clamp(68px,9vw,130px);
+  font-family:var(--big);font-size:clamp(56px,9vw,130px);
   line-height:.9;letter-spacing:.01em;color:var(--fg);margin-bottom:36px;
 }
 .sec-h em{font-family:var(--display);font-style:italic;color:var(--gold);font-size:.78em;}
@@ -299,7 +310,7 @@ body.on-interactive #c-text{opacity:1;}
 }
 .stat:first-child{border-top:1px solid var(--border);}
 .stat:hover{padding-left:14px;}
-.stat-n{font-family:var(--big);font-size:clamp(60px,7vw,88px);line-height:1;color:var(--fg);letter-spacing:-.02em;}
+.stat-n{font-family:var(--big);font-size:clamp(48px,7vw,88px);line-height:1;color:var(--fg);letter-spacing:-.02em;min-width:1ch;}
 .stat-n sup{font-size:.3em;vertical-align:top;margin-top:14px;display:inline-block;color:var(--gold);}
 .stat-info{}
 .stat-title{font-family:var(--mono);font-size:13px;color:var(--fg);margin-bottom:4px;}
@@ -310,13 +321,13 @@ body.on-interactive #c-text{opacity:1;}
 .exp-wrap{
   width:100%;height:100%;
   display:flex;flex-direction:column;justify-content:center;
-  padding:80px 10vw;position:relative;
+  padding:56px 10vw;position:relative;
 }
-.exp-hdr{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:56px;}
+.exp-hdr{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:36px;}
 .exp-cnt{font-family:var(--mono);font-size:9px;letter-spacing:.4em;color:var(--fg3);text-transform:uppercase;}
 .exp-row{
   display:grid;grid-template-columns:180px 1fr auto;
-  align-items:center;gap:44px;padding:28px 0;
+  align-items:center;gap:44px;padding:22px 0;
   border-top:1px solid var(--border);
   cursor:none;position:relative;overflow:hidden;
   transition:padding-left .5s var(--ease);
@@ -327,7 +338,7 @@ body.on-interactive #c-text{opacity:1;}
 .exp-row:last-child{border-bottom:1px solid var(--border);}
 .exp-yr{font-family:var(--mono);font-size:10px;letter-spacing:.15em;color:var(--gold);opacity:.7;}
 .exp-co{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--fg3);margin-bottom:6px;}
-.exp-role{font-family:var(--display);font-style:italic;font-size:28px;color:var(--fg);}
+.exp-role{font-family:var(--display);font-style:italic;font-size:26px;color:var(--fg);}
 .exp-chips{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;}
 .chip{font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg3);padding:4px 10px;border:1px solid var(--border);border-radius:20px;}
 .exp-arr{
@@ -339,35 +350,52 @@ body.on-interactive #c-text{opacity:1;}
 .exp-arr svg{width:15px;height:15px;stroke:var(--fg3);fill:none;stroke-width:1.8;transition:stroke .3s;}
 .exp-row:hover .exp-arr svg{stroke:var(--gold);}
 .exp-bgn{
-  position:absolute;right:-2vw;top:50%;transform:translateY(-50%);
-  font-family:var(--big);font-size:28vw;line-height:1;
+  position:absolute;right:-2vw;top:14%;
+  font-family:var(--big);font-size:22vw;line-height:1;
   -webkit-text-stroke:1px var(--border);color:transparent;
-  pointer-events:none;user-select:none;letter-spacing:-.03em;
+  pointer-events:none;user-select:none;letter-spacing:-.03em;z-index:-1;
 }
+
+/* — Signature element: live deploy pipeline — */
+.pipeline{margin-top:40px;border:1px solid var(--border);border-radius:4px;background:var(--card);padding:24px 28px 20px;position:relative;overflow:hidden;}
+.pipeline-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;}
+.pipeline-label{font-family:var(--mono);font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--fg2);display:flex;align-items:center;gap:9px;}
+.pipeline-env{font-family:var(--mono);font-size:9px;letter-spacing:.15em;color:var(--gold);opacity:.8;padding:3px 10px;border:1px solid var(--border2);border-radius:20px;}
+.pipeline-track{display:flex;align-items:center;gap:0;}
+.pnode{display:flex;flex-direction:column;align-items:center;gap:10px;flex-shrink:0;width:90px;}
+.pnode-dot{width:13px;height:13px;border-radius:50%;border:1.5px solid var(--border2);background:var(--bg2);transition:background .4s,border-color .4s,box-shadow .4s,transform .4s var(--spring);position:relative;}
+.pnode-dot::after{content:'';position:absolute;inset:-6px;border-radius:50%;border:1px solid var(--gold);opacity:0;transition:opacity .4s;}
+.pnode.active .pnode-dot{background:var(--gold);border-color:var(--gold);box-shadow:0 0 14px var(--gold-glow);transform:scale(1.15);}
+.pnode.active .pnode-dot::after{opacity:.5;}
+.pnode.done .pnode-dot{background:var(--ok);border-color:var(--ok);}
+.pnode-label{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--fg3);transition:color .4s;}
+.pnode.active .pnode-label,.pnode.done .pnode-label{color:var(--fg);}
+.pline{flex:1;height:1px;background:var(--border2);position:relative;margin:0 -2px 20px;min-width:16px;}
+.pline::after{content:'';position:absolute;inset:0;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease);}
+.pline.filled::after{transform:scaleX(1);}
+.pipeline-log{margin-top:22px;padding-top:16px;border-top:1px solid var(--border);font-family:var(--mono);font-size:12px;color:var(--gold);opacity:.9;min-height:18px;}
+.pipeline-log::before{content:'$ ';color:var(--fg3);}
+.pipeline-log .cursor-blink{display:inline-block;width:6px;height:12px;background:var(--gold);margin-left:2px;vertical-align:middle;animation:blink 1s step-end infinite;}
+@keyframes blink{50%{opacity:0}}
 
 /* ── PROJECTS ── */
 #p3{background:var(--panel-alt);}
 .proj-wrap{width:100%;height:100%;display:grid;grid-template-columns:360px 1fr;}
 
-/* Updated Side Panel */
 .proj-side{
   display:flex;flex-direction:column;justify-content:center;
   padding:80px 50px 80px 10vw;
   border-right:1px solid var(--border);
   position:relative;z-index:2;
 }
-
-/* OVERLAP FIX: Pulls heading to far left edge */
 .proj-side .sec-h {
-  margin-left: -10vw; 
-  width: calc(100% + 10vw); 
+  margin-left: -10vw;
+  width: calc(100% + 10vw);
   padding-left: 15px;
   line-height: 0.85;
 }
-
-/* Sizing for SELECTED */
 .proj-side .sec-h span {
-  font-size: 0.72em; 
+  font-size: 0.72em;
   display: block;
   letter-spacing: -0.01em;
   margin-bottom: 8px;
@@ -383,10 +411,10 @@ body.on-interactive #c-text{opacity:1;}
 }
 .proj-cards::-webkit-scrollbar{display:none;}
 .pcard{
-  flex-shrink:0;width:300px;
+  flex-shrink:0;width:290px;
   height:calc(100vh - 220px);max-height:480px;
   background:var(--bg);
-  padding:40px 34px;border-radius:3px;
+  padding:36px 30px;border-radius:3px;
   scroll-snap-align:start;
   position:relative;overflow:hidden;cursor:none;
   display:flex;flex-direction:column;justify-content:space-between;
@@ -398,20 +426,20 @@ body.on-interactive #c-text{opacity:1;}
 .pcard:hover{transform:translateY(-12px) scale(1.02);box-shadow:0 40px 80px rgba(0,0,0,.4);border-color:var(--border2);}
 .pcard:hover::before{transform:scaleX(1);}
 .pcard:hover::after{left:150%;}
-.pcard-n{font-family:var(--mono);font-size:9px;letter-spacing:.25em;color:var(--gold);opacity:.6;margin-bottom:18px;}
-.pcard-ico{width:44px;height:44px;border:1px solid var(--border2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:22px;transition:background .3s,border-color .3s;}
+.pcard-n{font-family:var(--mono);font-size:9px;letter-spacing:.25em;color:var(--gold);opacity:.6;margin-bottom:16px;}
+.pcard-ico{width:42px;height:42px;border:1px solid var(--border2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:20px;transition:background .3s,border-color .3s;}
 .pcard:hover .pcard-ico{background:var(--gold-dim);border-color:var(--gold);}
-.pcard-ico svg{width:18px;height:18px;stroke:var(--fg3);fill:none;stroke-width:1.6;transition:stroke .3s;}
+.pcard-ico svg{width:17px;height:17px;stroke:var(--fg3);fill:none;stroke-width:1.6;transition:stroke .3s;}
 .pcard:hover .pcard-ico svg{stroke:var(--gold);}
-.pcard-name{font-family:var(--display);font-style:italic;font-size:26px;color:var(--fg);line-height:1.2;margin-bottom:12px;flex:1;}
-.pcard-desc{font-family:var(--mono);font-size:11px;color:var(--fg3);line-height:1.8;margin-bottom:24px;}
+.pcard-name{font-family:var(--display);font-style:italic;font-size:24px;color:var(--fg);line-height:1.2;margin-bottom:12px;flex:1;}
+.pcard-desc{font-family:var(--mono);font-size:10.5px;color:var(--fg3);line-height:1.75;margin-bottom:22px;}
 .pcard-foot{display:flex;justify-content:space-between;align-items:center;}
 .pcard-tags{display:flex;flex-wrap:wrap;gap:6px;}
 .ptag{font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg3);padding:3px 9px;border:1px solid var(--border);border-radius:2px;transition:border-color .3s,color .3s;}
 .pcard:hover .ptag{border-color:rgba(200,150,90,.25);color:var(--gold);}
 
 .marquee-bar{position:absolute;bottom:0;left:0;right:0;height:36px;background:var(--gold);overflow:hidden;display:flex;align-items:center;}
-.mq-track{display:flex;gap:48px;white-space:nowrap;animation:mq 22s linear infinite;}
+.mq-track{display:flex;gap:48px;white-space:nowrap;animation:mq 26s linear infinite;}
 .mq-item{font-family:var(--mono);font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--bg);opacity:.7;}
 .mq-sep{color:var(--bg);opacity:.35;}
 @keyframes mq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
@@ -423,7 +451,7 @@ body.on-interactive #c-text{opacity:1;}
   display:flex;flex-direction:column;justify-content:center;
   padding:80px 10vw;position:relative;
 }
-.skills-hdr{display:flex;align-items:baseline;gap:40px;margin-bottom:56px;}
+.skills-hdr{display:flex;align-items:baseline;gap:40px;margin-bottom:56px;flex-wrap:wrap;}
 .skills-sub{font-family:var(--display);font-style:italic;font-size:18px;color:var(--fg3);}
 .skill-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;}
 .sb{
@@ -437,7 +465,7 @@ body.on-interactive #c-text{opacity:1;}
 .sb:hover{background:var(--card-h);border-color:var(--border2);transform:translateY(-4px);}
 .sb:hover::after{opacity:1;}
 .sb-lv{font-family:var(--mono);font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);opacity:.6;margin-bottom:8px;}
-.sb-name{font-family:var(--mono);font-size:13px;color:var(--fg);margin-bottom:12px;font-weight:400;}
+.sb-name{font-family:var(--mono);font-size:12.5px;color:var(--fg);margin-bottom:12px;font-weight:400;}
 .sb-bar{height:1.5px;background:var(--border);border-radius:2px;overflow:hidden;}
 .sb-fill{height:100%;background:linear-gradient(90deg,rgba(200,150,90,.5),var(--gold));width:0;transition:width 2s var(--spring);border-radius:2px;}
 
@@ -507,6 +535,7 @@ body.on-interactive #c-text{opacity:1;}
 .fsub:hover{transform:translateY(-2px);}
 .fsub span{position:relative;z-index:1;transition:color .3s;}
 .fsub:hover span{color:var(--bg);}
+.fsub:disabled{opacity:.6;}
 
 /* ════════════════════════════════════════════
     REVEAL SYSTEM
@@ -544,6 +573,42 @@ body.on-interactive #c-text{opacity:1;}
   font-family:var(--mono);font-size:8px;letter-spacing:.45em;text-transform:uppercase;
   color:var(--fg3);white-space:nowrap;pointer-events:none;
 }
+
+/* ════════════════════════════════════════════
+    REDUCED MOTION
+════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.15s!important;}
+  #reel{transition:none!important;}
+}
+
+/* ════════════════════════════════════════════
+    RESPONSIVE
+════════════════════════════════════════════ */
+@media (max-width:900px){
+  .hud-top,.hud-bot{padding:0 20px;}
+  .hero-wrap{padding:0 6vw;}
+  .hero-sub{gap:28px;}
+  .panel{overflow-y:auto;-webkit-overflow-scrolling:touch;}
+  .about-grid,.contact-grid,.proj-wrap{grid-template-columns:1fr;}
+  .about-l,.about-r,.contact-l,.contact-r,.proj-side{
+    padding:56px 6vw 28px;border-right:none;overflow-y:auto;max-height:100%;
+  }
+  .about-l,.contact-l{border-bottom:1px solid var(--border);}
+  .proj-side{border-bottom:1px solid var(--border);}
+  .proj-side .sec-h{margin-left:0;width:100%;padding-left:0;}
+  .proj-cards{padding:28px 6vw 90px;}
+  .pcard{height:auto;min-height:340px;max-height:none;width:250px;}
+  .exp-wrap{padding:56px 6vw;}
+  .exp-row{grid-template-columns:1fr;gap:10px;text-align:left;}
+  .exp-bgn{display:none;}
+  .pipeline{padding:20px 16px;}
+  .pipeline-track{overflow-x:auto;padding-bottom:6px;}
+  .skills-wrap{padding:56px 6vw;}
+  .skill-grid{grid-template-columns:repeat(2,1fr);}
+  .hero-name{font-size:clamp(52px,17vw,120px);}
+  .sec-h{font-size:clamp(44px,13vw,90px);}
+}
 </style>
 </head>
 <body>
@@ -561,7 +626,8 @@ body.on-interactive #c-text{opacity:1;}
   <div class="ld-grid"></div>
   <div class="ld-num" id="ld-num">0</div>
   <div class="ld-pct">%</div>
-  <div class="ld-label">Initializing System</div>
+  <div class="ld-cmd" id="ld-cmd">$ terraform init</div>
+  <div class="ld-label">Provisioning System</div>
   <div class="ld-name">Sohel Mohammed</div>
   <div class="ld-line" id="ld-line"></div>
 </div>
@@ -571,19 +637,20 @@ body.on-interactive #c-text{opacity:1;}
 
   <!-- HUD TOP -->
   <div class="hud-top" id="hud-top">
-    <div class="hud-logo">S<em>M</em></div>
+    <button class="hud-logo" onclick="goTo(0)" aria-label="Back to top">S<em>M</em></button>
     <div class="hud-nav">
-      <div class="h-dot on" data-i="0" onclick="goTo(0)"></div>
-      <div class="h-dot" data-i="1" onclick="goTo(1)"></div>
-      <div class="h-dot" data-i="2" onclick="goTo(2)"></div>
-      <div class="h-dot" data-i="3" onclick="goTo(3)"></div>
-      <div class="h-dot" data-i="4" onclick="goTo(4)"></div>
-      <div class="h-dot" data-i="5" onclick="goTo(5)"></div>
+      <button class="h-dot on" data-i="0" onclick="goTo(0)" aria-label="Hero"></button>
+      <button class="h-dot" data-i="1" onclick="goTo(1)" aria-label="About"></button>
+      <button class="h-dot" data-i="2" onclick="goTo(2)" aria-label="Experience"></button>
+      <button class="h-dot" data-i="3" onclick="goTo(3)" aria-label="Projects"></button>
+      <button class="h-dot" data-i="4" onclick="goTo(4)" aria-label="Tech Stack"></button>
+      <button class="h-dot" data-i="5" onclick="goTo(5)" aria-label="Contact"></button>
     </div>
     <div class="hud-right">
       <div class="hud-clock" id="hud-clk">00:00:00</div>
+      <div class="hud-status" id="visitor-status"><span class="pulse-dot"></span><span id="visitor-count">···</span></div>
       <div class="hud-status"><span class="pulse-dot"></span>Online</div>
-      <button class="theme-btn" onclick="toggleTheme()" title="Toggle theme">
+      <button class="theme-btn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle theme">
         <span class="theme-icon moon">🌙</span>
         <span class="theme-icon sun">☀️</span>
       </button>
@@ -598,10 +665,10 @@ body.on-interactive #c-text{opacity:1;}
   </div>
 
   <!-- NAV ARROWS -->
-  <button class="nav-arrow prev dim" id="arr-prev" onclick="goTo(cur-1)">
+  <button class="nav-arrow prev dim" id="arr-prev" onclick="goTo(cur-1)" aria-label="Previous section">
     <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
   </button>
-  <button class="nav-arrow next" id="arr-next" onclick="goTo(cur+1)">
+  <button class="nav-arrow next" id="arr-next" onclick="goTo(cur+1)" aria-label="Next section">
     <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
   </button>
 
@@ -611,13 +678,13 @@ body.on-interactive #c-text{opacity:1;}
     <!-- HERO -->
     <div class="panel" id="p0">
       <div class="hero-wrap">
-        <div class="hero-eyebrow">DevOps Enthusiast — Hyderabad, IN</div>
+        <div class="hero-eyebrow"><span class="pulse-dot"></span>DevOps Engineer — Hyderabad, IN</div>
         <h1 class="hero-name">
           <span>SOHEL</span><br>
           <span class="outline">MOHA</span><span class="gold">MMED</span>
         </h1>
         <div class="hero-sub">
-          <p class="hero-desc">Engineering infrastructure with precision.<br>CI/CD, containers, clusters — built to last.</p>
+          <p class="hero-desc">Engineering infrastructure with precision.<br>Terraform, AWS, and CI/CD pipelines — built to last.</p>
           <div class="hero-btns">
             <button class="gbtn" onclick="goTo(5)"><span>Get in Touch →</span></button>
             <button class="gbtn" onclick="toast('Resume update in progress.')"><span>Download CV</span></button>
@@ -633,8 +700,8 @@ body.on-interactive #c-text{opacity:1;}
         <div class="about-l">
           <div class="sec-eye rv">01 — Profile</div>
           <h2 class="sec-h rv" data-d="1">THE<br><em>Engineer</em></h2>
-          <p class="body-p rv" data-d="2">Based in <strong>Hyderabad, Telangana</strong>. I specialize in <strong>infrastructure automation</strong>, secure server configuration, and production-grade deployment pipelines.</p>
-          <p class="body-p rv" data-d="3">I bridge development and operations — turning code into <strong>reliable, scalable systems</strong> engineered for the long term.</p>
+          <p class="body-p rv" data-d="2">Based in <strong>Hyderabad, Telangana</strong>. I build and maintain <strong>modular Terraform infrastructure</strong> on AWS, deployed through GitHub Actions pipelines authenticated with OIDC — no long-lived keys, no manual steps.</p>
+          <p class="body-p rv" data-d="3">I bridge development and operations — turning application code into <strong>reliable, reproducible systems</strong> across dev, QA, and production.</p>
           <div class="btn-row rv" data-d="4">
             <button class="gbtn" onclick="toast('Resume update in progress.')"><span>Download Resume</span></button>
             <button class="gbtn" onclick="goTo(5)"><span>Say Hello →</span></button>
@@ -642,16 +709,16 @@ body.on-interactive #c-text{opacity:1;}
         </div>
         <div class="about-r">
           <div class="stat rv" data-d="1">
-            <div class="stat-n">3<sup> mon</sup></div>
-            <div class="stat-info"><div class="stat-title">Active in DevOps</div><div class="stat-desc">Containerization, CI/CD, production deploys</div></div>
+            <div class="stat-n" id="stat-months">6<sup> mon</sup></div>
+            <div class="stat-info"><div class="stat-title">In Full-Time DevOps</div><div class="stat-desc">Terraform, AWS, and GitHub Actions at Worthit</div></div>
           </div>
           <div class="stat rv" data-d="2">
-            <div class="stat-n">10<sup>+</sup></div>
-            <div class="stat-info"><div class="stat-title">Projects Shipped</div><div class="stat-desc">Automation tools, web apps, infra scripts</div></div>
+            <div class="stat-n"><span id="stat-repos">10</span><sup>+</sup></div>
+            <div class="stat-info"><div class="stat-title">Public Repositories</div><div class="stat-desc" id="stat-repos-desc">Live from GitHub — automation tools, web apps, infra</div></div>
           </div>
           <div class="stat rv" data-d="3">
-            <div class="stat-n">∞</div>
-            <div class="stat-info"><div class="stat-title">Uptime Mindset</div><div class="stat-desc">Systems built for reliability and zero-downtime</div></div>
+            <div class="stat-n">12<sup>+</sup></div>
+            <div class="stat-info"><div class="stat-title">AWS Services in Play</div><div class="stat-desc">ACM, API Gateway, Lambda, DynamoDB, S3, CloudFront &amp; more</div></div>
           </div>
         </div>
       </div>
@@ -670,8 +737,8 @@ body.on-interactive #c-text{opacity:1;}
             <span class="exp-yr">Feb 2026 → Present</span>
             <div>
               <div class="exp-co">Worthit</div>
-              <div class="exp-role">Software Engineer Trainee</div>
-              <div class="exp-chips"><span class="chip">Full Stack</span><span class="chip">Architecture</span><span class="chip">Deployment</span></div>
+              <div class="exp-role">DevOps Engineer</div>
+              <div class="exp-chips"><span class="chip">Terraform</span><span class="chip">AWS</span><span class="chip">GitHub Actions</span><span class="chip">OIDC</span></div>
             </div>
             <div class="exp-arr"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
           </div>
@@ -684,6 +751,26 @@ body.on-interactive #c-text{opacity:1;}
             </div>
             <div class="exp-arr"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
           </div>
+
+          <!-- SIGNATURE: live deploy pipeline -->
+          <div class="pipeline rv" data-d="3">
+            <div class="pipeline-hdr">
+              <span class="pipeline-label"><span class="pulse-dot"></span>Live Deploy Pipeline</span>
+              <span class="pipeline-env">env: prod · us-east-1</span>
+            </div>
+            <div class="pipeline-track" id="pipeline-track">
+              <div class="pnode" data-i="0"><div class="pnode-dot"></div><div class="pnode-label">Commit</div></div>
+              <div class="pline" data-i="0"></div>
+              <div class="pnode" data-i="1"><div class="pnode-dot"></div><div class="pnode-label">Plan</div></div>
+              <div class="pline" data-i="1"></div>
+              <div class="pnode" data-i="2"><div class="pnode-dot"></div><div class="pnode-label">Build</div></div>
+              <div class="pline" data-i="2"></div>
+              <div class="pnode" data-i="3"><div class="pnode-dot"></div><div class="pnode-label">Apply</div></div>
+              <div class="pline" data-i="3"></div>
+              <div class="pnode" data-i="4"><div class="pnode-dot"></div><div class="pnode-label">Monitor</div></div>
+            </div>
+            <div class="pipeline-log" id="pipeline-log">git push origin main<span class="cursor-blink"></span></div>
+          </div>
         </div>
         <div class="exp-bgn">02</div>
       </div>
@@ -695,68 +782,87 @@ body.on-interactive #c-text{opacity:1;}
       <div class="proj-wrap">
         <div class="proj-side">
           <div class="sec-eye rv">03 — Work</div>
-          
-          <!-- Heading with Overlap Fix and Sizing -->
           <h2 class="sec-h rv" data-d="1">
             <span>SELECTED</span>
             <em>Work</em>
           </h2>
-          
-          <p class="body-p rv" data-d="2" style="max-width:280px;font-size:16px;">Production-grade projects across automation, AI tooling, and infrastructure engineering.</p>
+          <p class="body-p rv" data-d="2" style="max-width:280px;font-size:16px;">Production infrastructure, self-hosted apps, and tools — built and deployed end to end.</p>
           <div class="proj-hint rv" data-d="3"><span></span>Scroll cards →</div>
         </div>
-        
+
         <div class="proj-cards">
           <div class="pcard rv" data-d="1">
             <div>
-              <div class="pcard-n">01 / PRODUCT</div>
-              <div class="pcard-ico"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-              <div class="pcard-name">TalentScan AI</div>
+              <div class="pcard-n">01 / INFRA</div>
+              <div class="pcard-ico"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+              <div class="pcard-name">BillBox Cloud Infrastructure</div>
             </div>
             <div>
-              <p class="pcard-desc">HR Intelligence Portal using deep document parsing to extract candidate signals and auto-rank resumes.</p>
-              <div class="pcard-foot"><div class="pcard-tags"><span class="ptag">Python</span><span class="ptag">Streamlit</span><span class="ptag">NLP</span></div></div>
+              <p class="pcard-desc">Modular Terraform for a billing platform — ACM, API Gateway, Lambda, DynamoDB, CloudFront &amp; Route53 — provisioned across dev, QA and prod.</p>
+              <div class="pcard-foot"><div class="pcard-tags"><span class="ptag">Terraform</span><span class="ptag">AWS</span><span class="ptag">OIDC</span></div></div>
             </div>
           </div>
           <div class="pcard rv" data-d="2">
             <div>
-              <div class="pcard-n">02 / INFRA</div>
+              <div class="pcard-n">02 / PIPELINE</div>
               <div class="pcard-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></div>
-              <div class="pcard-name">Production CI/CD Engine</div>
+              <div class="pcard-name">Multi-Env CI/CD Pipeline</div>
             </div>
             <div>
-              <p class="pcard-desc">GitHub Actions pipeline with multi-stage Docker builds and Nginx reverse proxy for zero-downtime deployments.</p>
-              <div class="pcard-foot"><div class="pcard-tags"><span class="ptag">Docker</span><span class="ptag">Nginx</span><span class="ptag">GHA</span></div></div>
+              <p class="pcard-desc">GitHub Actions pipeline with OIDC auth, module-level Terraform targeting, and safe reverse-order destroy passes across three environments.</p>
+              <div class="pcard-foot"><div class="pcard-tags"><span class="ptag">GitHub Actions</span><span class="ptag">IAM</span><span class="ptag">Terraform</span></div></div>
             </div>
           </div>
           <div class="pcard rv" data-d="3">
             <div>
-              <div class="pcard-n">03 / PLATFORM</div>
-              <div class="pcard-ico"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-              <div class="pcard-name">K8s Cluster Provisioning</div>
+              <div class="pcard-n">03 / PRODUCT</div>
+              <div class="pcard-ico"><svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="9" y1="18" x2="15" y2="18"/></svg></div>
+              <div class="pcard-name">secret-qr-hub</div>
             </div>
             <div>
-              <p class="pcard-desc">Multi-node Kubernetes cluster with Helm charts, HPA, and Prometheus/Grafana observability stack.</p>
-              <div class="pcard-foot"><div class="pcard-tags"><span class="ptag">K8s</span><span class="ptag">Helm</span><span class="ptag">Prometheus</span></div></div>
+              <p class="pcard-desc">Next.js App Router app for sharing expiring, view-limited, password-protected secrets via QR code — containerized on an Ubuntu EC2 host.</p>
+              <div class="pcard-foot"><div class="pcard-tags"><span class="ptag">Next.js</span><span class="ptag">Docker</span><span class="ptag">EC2</span></div></div>
             </div>
           </div>
           <div class="pcard rv" data-d="4">
             <div>
               <div class="pcard-n">04 / TOOL</div>
-              <div class="pcard-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-              <div class="pcard-name">Server Hardening Toolkit</div>
+              <div class="pcard-ico"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+              <div class="pcard-name">DayPanel</div>
             </div>
             <div>
-              <p class="pcard-desc">Bash + Ansible scripts for secure Ubuntu provisioning — firewall, SSH lockdown, auto-patching.</p>
-              <div class="pcard-foot"><div class="pcard-tags"><span class="ptag">Ansible</span><span class="ptag">Bash</span><span class="ptag">Ubuntu</span></div></div>
+              <p class="pcard-desc">A self-hosted personal productivity dashboard — Flask, PostgreSQL and Docker Compose, running on a hardened EC2 instance.</p>
+              <div class="pcard-foot"><div class="pcard-tags"><span class="ptag">Flask</span><span class="ptag">PostgreSQL</span><span class="ptag">Docker</span></div></div>
+            </div>
+          </div>
+          <div class="pcard rv" data-d="5">
+            <div>
+              <div class="pcard-n">05 / TOOL</div>
+              <div class="pcard-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <div class="pcard-name">Resume Analyzer</div>
+            </div>
+            <div>
+              <p class="pcard-desc">A free, client-side resume analyzer — parses and scores resumes entirely in the browser, no backend, no data leaves the device.</p>
+              <div class="pcard-foot"><div class="pcard-tags"><span class="ptag">JavaScript</span><span class="ptag">Client-side</span></div></div>
+            </div>
+          </div>
+          <div class="pcard rv" data-d="6">
+            <div>
+              <div class="pcard-n">06 / TOOL</div>
+              <div class="pcard-ico"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+              <div class="pcard-name">Speed Test App</div>
+            </div>
+            <div>
+              <p class="pcard-desc">A self-hosted internet speed test web app, deployed and load-tested on an AWS EC2 instance.</p>
+              <div class="pcard-foot"><div class="pcard-tags"><span class="ptag">AWS EC2</span><span class="ptag">Networking</span></div></div>
             </div>
           </div>
         </div>
       </div>
       <div class="marquee-bar">
         <div class="mq-track">
-          <span class="mq-item">Docker <span class="mq-sep">◆</span></span><span class="mq-item">Kubernetes <span class="mq-sep">◆</span></span><span class="mq-item">GitHub Actions <span class="mq-sep">◆</span></span><span class="mq-item">Python <span class="mq-sep">◆</span></span><span class="mq-item">Nginx <span class="mq-sep">◆</span></span><span class="mq-item">Bash Scripting <span class="mq-sep">◆</span></span><span class="mq-item">Terraform <span class="mq-sep">◆</span></span><span class="mq-item">AWS <span class="mq-sep">◆</span></span><span class="mq-item">Ansible <span class="mq-sep">◆</span></span><span class="mq-item">Linux <span class="mq-sep">◆</span></span>
-          <span class="mq-item">Docker <span class="mq-sep">◆</span></span><span class="mq-item">Kubernetes <span class="mq-sep">◆</span></span><span class="mq-item">GitHub Actions <span class="mq-sep">◆</span></span><span class="mq-item">Python <span class="mq-sep">◆</span></span><span class="mq-item">Nginx <span class="mq-sep">◆</span></span><span class="mq-item">Bash Scripting <span class="mq-sep">◆</span></span><span class="mq-item">Terraform <span class="mq-sep">◆</span></span><span class="mq-item">AWS <span class="mq-sep">◆</span></span><span class="mq-item">Ansible <span class="mq-sep">◆</span></span><span class="mq-item">Linux <span class="mq-sep">◆</span></span>
+          <span class="mq-item">Terraform <span class="mq-sep">◆</span></span><span class="mq-item">AWS <span class="mq-sep">◆</span></span><span class="mq-item">Docker <span class="mq-sep">◆</span></span><span class="mq-item">GitHub Actions <span class="mq-sep">◆</span></span><span class="mq-item">Next.js <span class="mq-sep">◆</span></span><span class="mq-item">Python <span class="mq-sep">◆</span></span><span class="mq-item">Nginx <span class="mq-sep">◆</span></span><span class="mq-item">Bash Scripting <span class="mq-sep">◆</span></span><span class="mq-item">PostgreSQL <span class="mq-sep">◆</span></span><span class="mq-item">Linux <span class="mq-sep">◆</span></span>
+          <span class="mq-item">Terraform <span class="mq-sep">◆</span></span><span class="mq-item">AWS <span class="mq-sep">◆</span></span><span class="mq-item">Docker <span class="mq-sep">◆</span></span><span class="mq-item">GitHub Actions <span class="mq-sep">◆</span></span><span class="mq-item">Next.js <span class="mq-sep">◆</span></span><span class="mq-item">Python <span class="mq-sep">◆</span></span><span class="mq-item">Nginx <span class="mq-sep">◆</span></span><span class="mq-item">Bash Scripting <span class="mq-sep">◆</span></span><span class="mq-item">PostgreSQL <span class="mq-sep">◆</span></span><span class="mq-item">Linux <span class="mq-sep">◆</span></span>
         </div>
       </div>
       <span class="panel-tag">03 — Projects</span>
@@ -770,16 +876,16 @@ body.on-interactive #c-text{opacity:1;}
           <p class="skills-sub rv" data-d="2">Tools I deploy<br>with confidence.</p>
         </div>
         <div class="skill-grid" id="skill-grid">
-          <div class="sb feat rv" data-d="1"><div class="sb-lv">Expert</div><div class="sb-name">Docker</div><div class="sb-bar"><div class="sb-fill" data-w="90"></div></div></div>
-          <div class="sb rv" data-d="1"><div class="sb-lv">Advanced</div><div class="sb-name">Linux / Bash</div><div class="sb-bar"><div class="sb-fill" data-w="88"></div></div></div>
-          <div class="sb rv" data-d="2"><div class="sb-lv">Advanced</div><div class="sb-name">Python</div><div class="sb-bar"><div class="sb-fill" data-w="80"></div></div></div>
-          <div class="sb rv" data-d="2"><div class="sb-lv">Advanced</div><div class="sb-name">GitHub Actions</div><div class="sb-bar"><div class="sb-fill" data-w="87"></div></div></div>
-          <div class="sb rv" data-d="3"><div class="sb-lv">Advanced</div><div class="sb-name">Nginx</div><div class="sb-bar"><div class="sb-fill" data-w="85"></div></div></div>
-          <div class="sb rv" data-d="3"><div class="sb-lv">Intermediate</div><div class="sb-name">Kubernetes</div><div class="sb-bar"><div class="sb-fill" data-w="72"></div></div></div>
-          <div class="sb rv" data-d="4"><div class="sb-lv">Intermediate</div><div class="sb-name">Ansible</div><div class="sb-bar"><div class="sb-fill" data-w="68"></div></div></div>
-          <div class="sb rv" data-d="4"><div class="sb-lv">Intermediate</div><div class="sb-name">Terraform</div><div class="sb-bar"><div class="sb-fill" data-w="65"></div></div></div>
-          <div class="sb rv" data-d="5"><div class="sb-lv">Intermediate</div><div class="sb-name">AWS</div><div class="sb-bar"><div class="sb-fill" data-w="78"></div></div></div>
-          <div class="sb rv" data-d="5"><div class="sb-lv">Intermediate</div><div class="sb-name">JavaScript</div><div class="sb-bar"><div class="sb-fill" data-w="70"></div></div></div>
+          <div class="sb feat rv" data-d="1"><div class="sb-lv">Expert</div><div class="sb-name">Terraform</div><div class="sb-bar"><div class="sb-fill" data-w="90"></div></div></div>
+          <div class="sb feat rv" data-d="1"><div class="sb-lv">Expert</div><div class="sb-name">Docker</div><div class="sb-bar"><div class="sb-fill" data-w="88"></div></div></div>
+          <div class="sb rv" data-d="2"><div class="sb-lv">Advanced</div><div class="sb-name">AWS (EC2, VPC, Lambda)</div><div class="sb-bar"><div class="sb-fill" data-w="85"></div></div></div>
+          <div class="sb rv" data-d="2"><div class="sb-lv">Advanced</div><div class="sb-name">GitHub Actions / OIDC</div><div class="sb-bar"><div class="sb-fill" data-w="87"></div></div></div>
+          <div class="sb rv" data-d="3"><div class="sb-lv">Advanced</div><div class="sb-name">Linux / Bash</div><div class="sb-bar"><div class="sb-fill" data-w="84"></div></div></div>
+          <div class="sb rv" data-d="3"><div class="sb-lv">Intermediate</div><div class="sb-name">Next.js / React</div><div class="sb-bar"><div class="sb-fill" data-w="70"></div></div></div>
+          <div class="sb rv" data-d="4"><div class="sb-lv">Intermediate</div><div class="sb-name">Python / Flask</div><div class="sb-bar"><div class="sb-fill" data-w="68"></div></div></div>
+          <div class="sb rv" data-d="4"><div class="sb-lv">Intermediate</div><div class="sb-name">PostgreSQL</div><div class="sb-bar"><div class="sb-fill" data-w="65"></div></div></div>
+          <div class="sb rv" data-d="5"><div class="sb-lv">Intermediate</div><div class="sb-name">Nginx</div><div class="sb-bar"><div class="sb-fill" data-w="66"></div></div></div>
+          <div class="sb rv" data-d="5"><div class="sb-lv">Intermediate</div><div class="sb-name">CloudFront / Route53</div><div class="sb-bar"><div class="sb-fill" data-w="62"></div></div></div>
         </div>
       </div>
       <span class="panel-tag">04 — Skills</span>
@@ -796,11 +902,11 @@ body.on-interactive #c-text{opacity:1;}
               <div class="clink-l"><div class="clink-ico"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="clink-name">Email</div><div class="clink-sub">sohel879879@gmail.com</div></div></div>
               <div class="clink-arr">↗</div>
             </a>
-            <a class="clink rv" data-d="3" href="https://github.com/sohelmohammed0" target="_blank">
+            <a class="clink rv" data-d="3" href="https://github.com/sohelmohammed0" target="_blank" rel="noopener">
               <div class="clink-l"><div class="clink-ico"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div><div><div class="clink-name">GitHub</div><div class="clink-sub">github.com/sohelmohammed0</div></div></div>
               <div class="clink-arr">↗</div>
             </a>
-            <a class="clink rv" data-d="4" href="https://linkedin.com/in/sohel" target="_blank">
+            <a class="clink rv" data-d="4" href="https://linkedin.com/in/sohel" target="_blank" rel="noopener">
               <div class="clink-l"><div class="clink-ico"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div><div><div class="clink-name">LinkedIn</div><div class="clink-sub">linkedin.com/in/sohel</div></div></div>
               <div class="clink-arr">↗</div>
             </a>
@@ -878,43 +984,48 @@ body.on-interactive #c-text{opacity:1;}
 })();
 
 /* ════════════════════════════════════════════
-    CURSOR + TRAIL
+    CURSOR + TRAIL (skipped on touch devices)
 ════════════════════════════════════════════ */
-const cdot=document.getElementById('c-dot'),cring=document.getElementById('c-ring'),ctxt=document.getElementById('c-text');
-let mx=0,my=0,cx=0,cy=0,ox=0,oy=0;
-const TRAILS=10,trails=[];
-const tw=document.getElementById('trail-wrap');
-for(let i=0;i<TRAILS;i++){
-  const d=document.createElement('div');d.className='t-dot';
-  d.style.opacity=(1-i/TRAILS)*.5+'';d.style.width=(4-i*.25)+'px';d.style.height=(4-i*.25)+'px';
-  d.style.zIndex=99985-i+'';tw.appendChild(d);trails.push({el:d,x:0,y:0});
+const isTouch = matchMedia('(hover:none),(pointer:coarse)').matches;
+if(!isTouch){
+  const cdot=document.getElementById('c-dot'),cring=document.getElementById('c-ring'),ctxt=document.getElementById('c-text');
+  let mx=0,my=0,cx=0,cy=0,ox=0,oy=0;
+  const TRAILS=10,trails=[];
+  const tw=document.getElementById('trail-wrap');
+  for(let i=0;i<TRAILS;i++){
+    const d=document.createElement('div');d.className='t-dot';
+    d.style.opacity=(1-i/TRAILS)*.5+'';d.style.width=(4-i*.25)+'px';d.style.height=(4-i*.25)+'px';
+    d.style.zIndex=99985-i+'';tw.appendChild(d);trails.push({el:d,x:0,y:0});
+  }
+  addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  addEventListener('mousedown',()=>cdot.style.transform='translate(-50%,-50%) scale(.4)');
+  addEventListener('mouseup',()=>cdot.style.transform='translate(-50%,-50%) scale(1)');
+  document.querySelectorAll('button,a,.h-dot,.stat,.exp-row,.sb,.pcard,.clink,.theme-btn,.nav-arrow').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{document.body.classList.add('on-interactive');ctxt.style.left=ox+18+'px';ctxt.style.top=oy-14+'px';});
+    el.addEventListener('mouseleave',()=>document.body.classList.remove('on-interactive'));
+  });
+  (function animC(){
+    cx+=(mx-cx)*.25;cy+=(my-cy)*.25;ox+=(mx-ox)*.1;oy+=(my-oy)*.1;
+    cdot.style.left=cx+'px';cdot.style.top=cy+'px';
+    cring.style.left=ox+'px';cring.style.top=oy+'px';
+    ctxt.style.left=ox+18+'px';ctxt.style.top=oy-14+'px';
+    trails.forEach((t,i)=>{const p=i===0?{x:cx,y:cy}:trails[i-1];t.x+=(p.x-t.x)*.3;t.y+=(p.y-t.y)*.3;t.el.style.left=t.x+'px';t.el.style.top=t.y+'px';});
+    requestAnimationFrame(animC);
+  })();
 }
-addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-addEventListener('mousedown',()=>cdot.style.transform='translate(-50%,-50%) scale(.4)');
-addEventListener('mouseup',()=>cdot.style.transform='translate(-50%,-50%) scale(1)');
-document.querySelectorAll('button,a,.h-dot,.stat,.exp-row,.sb,.pcard,.clink,.theme-btn,.nav-arrow').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{document.body.classList.add('on-interactive');ctxt.style.left=ox+18+'px';ctxt.style.top=oy-14+'px';});
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('on-interactive'));
-});
-(function animC(){
-  cx+=(mx-cx)*.25;cy+=(my-cy)*.25;ox+=(mx-ox)*.1;oy+=(my-oy)*.1;
-  cdot.style.left=cx+'px';cdot.style.top=cy+'px';
-  cring.style.left=ox+'px';cring.style.top=oy+'px';
-  ctxt.style.left=ox+18+'px';ctxt.style.top=oy-14+'px';
-  trails.forEach((t,i)=>{const p=i===0?{x:cx,y:cy}:trails[i-1];t.x+=(p.x-t.x)*.3;t.y+=(p.y-t.y)*.3;t.el.style.left=t.x+'px';t.el.style.top=t.y+'px';});
-  requestAnimationFrame(animC);
-})();
 
 /* ════════════════════════════════════════════
     LOADER
 ════════════════════════════════════════════ */
-let prog2=0;
-const ldNum=document.getElementById('ld-num'),ldLine=document.getElementById('ld-line');
+const LD_CMDS=['$ terraform init','$ terraform plan','$ terraform apply -auto-approve','$ docker build -t app .','$ gh workflow run deploy.yml'];
+let prog2=0,ldStep=0;
+const ldNum=document.getElementById('ld-num'),ldLine=document.getElementById('ld-line'),ldCmd=document.getElementById('ld-cmd');
+const ldCmdInt=setInterval(()=>{ldStep=(ldStep+1)%LD_CMDS.length;if(ldCmd)ldCmd.textContent=LD_CMDS[ldStep];},480);
 const ldInt=setInterval(()=>{
   prog2+=Math.random()*3.5+1;if(prog2>=100)prog2=100;
   ldNum.textContent=Math.floor(prog2);ldLine.style.width=prog2+'%';
   if(prog2>=100){
-    clearInterval(ldInt);
+    clearInterval(ldInt);clearInterval(ldCmdInt);
     setTimeout(()=>{
       const loader=document.getElementById('loader');
       loader.classList.add('out');
@@ -939,7 +1050,7 @@ function goTo(idx){
   document.getElementById('hud-idx').textContent=`0${cur+1} / 0${N}`;
   document.getElementById('arr-prev').classList.toggle('dim',cur===0);
   document.getElementById('arr-next').classList.toggle('dim',cur===N-1);
-  setTimeout(()=>{busy=false;triggerReveal(cur);if(cur===4)animSkills();},1050);
+  setTimeout(()=>{busy=false;triggerReveal(cur);if(cur===4)animSkills();if(cur===2)startPipeline();},1050);
 }
 
 let wAcc=0,wTimer;
@@ -980,6 +1091,42 @@ function animSkills(){
 document.querySelectorAll('.sb').forEach(b=>{
   b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.setProperty('--bx',((e.clientX-r.left)/r.width*100)+'%');b.style.setProperty('--by',((e.clientY-r.top)/r.height*100)+'%');});
 });
+
+/* ════════════════════════════════════════════
+    SIGNATURE: LIVE DEPLOY PIPELINE
+════════════════════════════════════════════ */
+const PIPE_STAGES=[
+  {label:'Commit', log:'git push origin main'},
+  {label:'Plan',   log:'terraform plan -out=tfplan'},
+  {label:'Build',  log:'docker build -t billbox:latest .'},
+  {label:'Apply',  log:'terraform apply tfplan'},
+  {label:'Monitor',log:'curl -sf https://api.billboxai.com/health'}
+];
+let pipeStarted=false,pipeIdx=0,pipeTimer=null;
+function renderPipeStage(){
+  const nodes=document.querySelectorAll('#pipeline-track .pnode');
+  const lines=document.querySelectorAll('#pipeline-track .pline');
+  nodes.forEach((n,i)=>{
+    n.classList.toggle('done', i<pipeIdx);
+    n.classList.toggle('active', i===pipeIdx);
+  });
+  lines.forEach((l,i)=>l.classList.toggle('filled', i<pipeIdx));
+  const log=document.getElementById('pipeline-log');
+  if(log) log.innerHTML=(PIPE_STAGES[pipeIdx]?PIPE_STAGES[pipeIdx].log:PIPE_STAGES[0].log)+'<span class="cursor-blink"></span>';
+}
+function startPipeline(){
+  if(pipeStarted)return;pipeStarted=true;
+  renderPipeStage();
+  pipeTimer=setInterval(()=>{
+    pipeIdx++;
+    if(pipeIdx>=PIPE_STAGES.length){
+      pipeIdx=0;
+      document.querySelectorAll('#pipeline-track .pnode').forEach(n=>n.classList.remove('done','active'));
+      document.querySelectorAll('#pipeline-track .pline').forEach(l=>l.classList.remove('filled'));
+    }
+    renderPipeStage();
+  },1900);
+}
 
 /* ════════════════════════════════════════════
     THEME
@@ -1023,6 +1170,33 @@ async function sendForm(e){
   }catch{toast('Network error.','err');}
   finally{btn.querySelector('span').textContent='Send Message →';btn.disabled=false;}
 }
+
+/* ════════════════════════════════════════════
+    VISITOR COUNTER (Cloudflare Worker microservice)
+════════════════════════════════════════════ */
+fetch('https://visitors-api.sohelmohammed0.workers.dev')
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById('visitor-count').textContent = data.visitors + ' visitors';
+  })
+  .catch(() => {
+    document.getElementById('visitor-count').textContent = '— visitors';
+  });
+
+/* ════════════════════════════════════════════
+    LIVE GITHUB STATS
+════════════════════════════════════════════ */
+fetch('https://api.github.com/users/sohelmohammed0')
+  .then(res => res.ok ? res.json() : Promise.reject())
+  .then(data => {
+    const reposEl=document.getElementById('stat-repos');
+    const descEl=document.getElementById('stat-repos-desc');
+    if(reposEl && typeof data.public_repos === 'number'){
+      reposEl.textContent = data.public_repos;
+      if(descEl) descEl.textContent = `Live from GitHub · ${data.followers||0} followers`;
+    }
+  })
+  .catch(() => { /* keep static fallback value */ });
 </script>
 </body>
 </html>
